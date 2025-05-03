@@ -2,14 +2,16 @@ namespace RefactorDemo.Domain
 {
     public class InternalTransferRequest
     {
-        public string SourceAccountId { get; set; }
-        public string DestinationAccountId { get; set; }
+        public string SourceAccountId { get; set; } = string.Empty;
+        public string DestinationAccountId { get; set; } = string.Empty;
         public decimal Amount { get; set; }
-        public string TransferId { get; set; }
+        public string TransferId { get; set; } = string.Empty;
         public DateTime Timestamp { get; set; }
 
         public bool IsValid(out string validationError)
         {
+            validationError = string.Empty;
+            
             if (string.IsNullOrWhiteSpace(SourceAccountId))
             {
                 validationError = "SourceAccountId is required.";
@@ -30,7 +32,6 @@ namespace RefactorDemo.Domain
                 validationError = "Source and destination accounts must be different.";
                 return false;
             }
-            validationError = null;
             return true;
         }
     }
